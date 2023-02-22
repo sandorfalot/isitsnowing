@@ -4,25 +4,35 @@
   <style>
       .main{
           width: 50%;
-          height: auto;
-             position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+           display: flex;
+  flex-direction: column;
+    margin-top:10%;
     
-    margin: auto;
+    
+    margin-left: auto;
+    margin-right: auto;
           padding: 2%;
           border: 5px solid black;
           border-radius: 10px;
-         height: 25%;
           text-align: center;
           box-shadow: 1px 1px 20px rgb(0, 0, 0, 0.6);
-          background-color: rgb(255, 255, 255, 0.85);
+          background-color: rgba(255, 255, 255, 0.85);
       }
+      
+     
+
+#cell {
+  margin: 8%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+      
       h1 {
            font-family: Arial, Helvetica, sans-serif;
             font-weight: 700;
+            text-shadow: 3px 3px rgba(0,0,0, 0.15);
       }
       body, html {
   height: 100%;
@@ -38,6 +48,28 @@ html {
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
+             font-family: Arial, Helvetica, sans-serif;
+
+}
+
+/* unvisited link */
+a:link {
+  color: darkgray;
+}
+
+/* visited link */
+a:visited {
+  color: purple;
+}
+
+/* mouse over link */
+a:hover {
+  color: red;
+}
+
+/* selected link */
+a:active {
+  color: blue;
 }
   </style>
   <title>Is it snowing?</title>
@@ -46,7 +78,9 @@ html {
   
 </head>
 <body>
-<div class="main"><h1>Is it snowing?</h1>
+<div class="main">
+    <div id="cell">
+    <h1>Is it snowing?</h1>
 <?php
 require_once('geoplugin.class.php');
 $geoplugin = new geoPlugin();
@@ -88,7 +122,7 @@ curl_setopt_array($curl, [
 	CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 	CURLOPT_CUSTOMREQUEST => "GET",
 	CURLOPT_HTTPHEADER => [
-	
+		
 	],
 ]);
 
@@ -201,16 +235,16 @@ if ($concode = "1000") {
 }
 echo '</h1>';
 
-echo '<div class="footer"><i>Your location has come up as ';
+echo '<p><i>Your location has come up as ';
 echo $decoded_json['location']['name'];
 echo " ";
 echo $decoded_json['location']['region'];
 echo " ";
 echo $decoded_json['location']['country'];
-echo '</i>
-echo '<p>Weather API by <a href="https://www.weatherapi.com/">WeatherAPI.com</a> Geolocation API by <a href="https://www.geoplugin.com/webservices/php">Geoplugin</a> and <a href=""
-</div>';
+echo '</i></p>';
+echo '<p>Weather API by <a href="https://www.weatherapi.com/">WeatherAPI.com</a> Geolocation API by <a href="https://www.geoplugin.com/webservices/php">Geoplugin</a> and <a href="https://github.com/sandorfalot/isitsnowing">Git</a></p>';
 ?>
+</div><!-- cell -->
 </div> <!--main -->
 </body>
 </html>
